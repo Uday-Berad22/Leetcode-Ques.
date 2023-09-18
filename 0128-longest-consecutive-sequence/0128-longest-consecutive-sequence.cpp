@@ -6,6 +6,7 @@ public:
         for(auto &a : nums){
             s.insert(a);
         }
+        int ans=0;
         while(s.size()>0){
             auto a=*(s.begin());
             m[a]=1;
@@ -17,10 +18,7 @@ public:
                 i++;
             }
             m[a]+=m[a+i];
-        }
-        int ans=0;
-        for(auto a: m){
-            ans=max(ans,a.second);
+             ans=max(ans,m[a]);
         }
         return ans;
     }
