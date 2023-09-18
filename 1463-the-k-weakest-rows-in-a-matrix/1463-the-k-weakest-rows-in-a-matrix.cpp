@@ -6,9 +6,19 @@ public:
         vector<int> ans;
         for(int i=0;i<n;i++){
             int cnt=0;
-            for(auto &j: mat[i]){
-                if(j==1)cnt++;
+            int high=mat[i].size();
+            int low=-1;
+            while(high-low>1){
+                int mid=(high+low)/2;
+                if(mat[i][mid]==1){
+                    low=mid;
+                }
+                else{
+                    high=mid;
+                }
             }
+            if(high==mat[i].size()) cnt=mat[i].size();
+            else cnt=low+1;
             pq.push({cnt,i});
         }
          while(k--){
