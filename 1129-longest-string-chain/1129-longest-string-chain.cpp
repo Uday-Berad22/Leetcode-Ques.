@@ -8,7 +8,6 @@ public:
         for(int i=0;i<words.size();i++){
             m[words[i]]++;
             length[words[i]]=1;
-            cout<<words[i]<<" ";
         }
         int ans=1;
         for(auto &word : words){
