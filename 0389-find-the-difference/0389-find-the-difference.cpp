@@ -1,14 +1,15 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        unordered_map<char,int> m;
+        int x=0;
         for(int i=0;i<s.size();i++){
-            m[s[i]]++;
+            int temp=s[i]-'a'+1;
+            x=x^temp;
         }
         for(int i=0;i<t.size();i++){
-            m[t[i]]--;
-            if(m[t[i]]<0) return t[i];
+           int temp=t[i]-'a'+1;
+            x=x^temp;
         }
-        return 'a';
+        return char('a'+x-1);
     }
 };
