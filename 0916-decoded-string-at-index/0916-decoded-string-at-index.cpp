@@ -1,9 +1,8 @@
 class Solution {
 public:
     string decodeAtIndex(string s, int k) {
-        stack<char> stk;
         long long  cnt=1;
-        stk.push(s[0]);
+        int j=0;
         for(int i=1;i<s.size();i++){
             if(cnt>=k){
                 break;
@@ -14,20 +13,19 @@ public:
             else{
                 cnt++;
             }
-            stk.push(s[i]);
+            j++;
         }
+        int i=j;
         if(cnt==k){
-             while((stk.top()<='9'&&stk.top()>='1')){
-                    stk.pop();
+             while((s[i]<='9'&&s[i]>='1')){
+                    i--;
             
              } 
         }
         else
         {while(cnt>=k){
-            // if(stk.size()==k) break;
-            // if(k==cnt) break;
-            if(stk.top()<='9'&&stk.top()>='1'){
-                cnt=cnt/(stk.top()-'0');
+            if(s[i]<='9'&&s[i]>='1'){
+                cnt=cnt/(s[i]-'0');
             }
             else{
                 cnt--;
@@ -36,17 +34,16 @@ public:
             if(cnt<=k){
                 k=k%cnt;
             }
-            stk.pop();
+            i--;
             if(k==0){
-                while((stk.top()<='9'&&stk.top()>='1')){
-                    stk.pop();
+                while((s[i]<='9'&&s[i]>='1')){
+                    i--;
                 }
                 break;
             }
-            // if(stk.size()==k) break;
         }}
         string ans;
-        ans.push_back(stk.top());
+        ans.push_back(s[i]);
         return ans;
     }
 };
