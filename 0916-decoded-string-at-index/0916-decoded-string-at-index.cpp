@@ -16,32 +16,21 @@ public:
             j++;
         }
         int i=j;
-        if(cnt==k){
-             while((s[i]<='9'&&s[i]>='1')){
-                    i--;
-            
-             } 
-        }
-        else
-        {while(cnt>=k){
+        while(i>=0){
             if(s[i]<='9'&&s[i]>='1'){
                 cnt=cnt/(s[i]-'0');
             }
             else{
+                if(k==0||k==cnt){
+                    break;
+                }
                 cnt--;
             }
-            if(cnt==0)break;
             if(cnt<=k){
                 k=k%cnt;
             }
             i--;
-            if(k==0){
-                while((s[i]<='9'&&s[i]>='1')){
-                    i--;
-                }
-                break;
-            }
-        }}
+        }
         string ans;
         ans.push_back(s[i]);
         return ans;
