@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> sortArrayByParity(vector<int>& nums) {
-        vector<int> ans;
         int n=nums.size();
         int j=0;
         for(int i=0;j<n&&i<n;i++){
