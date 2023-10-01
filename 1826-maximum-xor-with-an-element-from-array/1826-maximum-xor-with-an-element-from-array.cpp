@@ -27,16 +27,14 @@ class Trie{
         Node *node=root;
         for(int i=31;i>=0;i--){
                int bit=((x>>i)&1); 
-               if(node!=NULL){
                if(node->link[1-bit]!=NULL){
                 ans=ans|(1<<i);
                 node=node->link[1-bit];
                 }
                 else
                 node=node->link[bit];
-         }else return -1;
-               }
-        //  if(ans==0)return -1;
+         }
+
         return ans;
     }
 };
@@ -76,6 +74,7 @@ public:
             while(index<n&&arr[index]<=a.val){
                 T.insert(arr[index]);index++;
             }
+            if(index!=0)
             fans[a.ind]=(T.max_xor(a.x));
         }
         return fans;
