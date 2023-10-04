@@ -1,8 +1,11 @@
+vector<int> v(1000000);
 class MyHashMap {
     unordered_map<int,int> m; 
 public:
     MyHashMap() {
-        
+        for(int i=0;i<1000000;i++){
+            v[i]=0;
+        }
     }
     
     void put(int key, int value) {
