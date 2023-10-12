@@ -13,8 +13,7 @@ public:
         vector<int> ans(people.size(),0);
         sort(endedbloom.begin(),endedbloom.end());
         for(int i=0;i<people.size();i++){
-            ans[i]=upper_bound(bloom.begin(),bloom.end(),people[i])-bloom.begin();
-            ans[i]=ans[i]-(lower_bound(endedbloom.begin(),endedbloom.end(),people[i])-endedbloom.begin());
+            ans[i]=(upper_bound(bloom.begin(),bloom.end(),people[i])-bloom.begin())-(lower_bound(endedbloom.begin(),endedbloom.end(),people[i])-endedbloom.begin());
         }
         return ans;
     }
