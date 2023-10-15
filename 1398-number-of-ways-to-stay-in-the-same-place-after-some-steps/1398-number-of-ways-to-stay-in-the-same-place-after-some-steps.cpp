@@ -1,5 +1,4 @@
 class Solution {
-    int ans=0;
     int M=1e9+7;
 public:
     int fun(int steps,int i,int arrlen,vector<vector<int>> &dp){
@@ -16,7 +15,8 @@ public:
         return dp[steps][i]=((a+b)%M+c)%M;
     }
     int numWays(int steps, int arrLen) {
-        vector<vector<int>> dp(steps+1,vector<int> (steps+1,-1));
+        int x=min(steps,arrLen);
+        vector<vector<int>> dp(steps+1,vector<int> (x+1,-1));
         return fun(steps,0,arrLen,dp);
     }
 };
