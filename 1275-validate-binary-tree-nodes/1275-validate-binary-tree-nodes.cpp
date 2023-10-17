@@ -12,33 +12,37 @@ public:
     }
     bool validateBinaryTreeNodes(int n, vector<int>& leftChild, vector<int>& rightChild) {
         unordered_map<int,int> m;
+        vector<int> parent(n,-1);
         for(int i=0;i<n;i++){
-            m[i]=0;
+            parent[i]=i;
         }
-        for(auto a: leftChild){
-            m[a]++;
+        for(int i=0;i<n;i++){
+          
+            if(leftChild[i]!=-1)
+            {
+                if(parent[i]==parent[leftChild[i]]){
+                    return false;
+                }
+                m[leftChild[i]]++;
+                parent[leftChild[i]]=parent[i];
+            }
+            if(rightChild[i]!=-1)
+            {
+                if(parent[i]==parent[rightChild[i]]){
+                    return false;
+                }
+                m[rightChild[i]]++;
+                parent[rightChild[i]]=parent[i];
+            }
+            m[i]+=0;
         }
-        for(auto a: rightChild){
-            m[a]++;
-        }
-        vector<int> v;
+        int cnt=0;
         for(auto a: m){
-            if(a.first!=-1&&a.second>1){
+            if(a.second>1){
                 return false;
             }
-            if(a.second==0){
-                v.push_back(a.first);
-            }
+            if(a.second==0) cnt++;
         }
-        vector<bool> visited(n,false);
-        int count=0;
-        for(auto &i: v){
-            int cnt=0;
-            if(detect_cycle(n,leftChild,rightChild,visited,i,cnt)==true)      {
-                return false;
-            }
-            count=max(count,cnt);
-        }
-        return count<n?false:true;
+        return cnt==1?true:false;
     }
 };
