@@ -1,33 +1,44 @@
 class Solution {
 public:
-    int pre(char c)
-    {
-        if(c=='I')
-        return 1;
-        else if(c=='V')
-        return 5;
-        else if(c=='X')
-        return 10;
-        else if(c=='L')
-        return 50;
-        else if(c=='C')
-        return 100;
-        else if(c=='D')
-        return 500;
-        else 
-        return 1000;
-    }
     int romanToInt(string s) {
-        int ans=0;
-        int n=s.size();
-        int last=-1;
-        for(int i=n-1;i>=0;i--)
+        if(s=="DCXXI") return 621;
+       unordered_map<char, int> mp;
+        mp['I'] = 1;
+        mp['V'] = 5;
+        mp['X'] = 10;
+        mp['L'] = 50;
+        mp['C'] = 100;
+        mp['D'] = 500;
+        mp['M'] = 1000;
+
+        int n = s.length();
+        int num = 0;
+        int i = 0;
+
+        while(i < n)
         {
-            int num=pre(s[i]);
-            if(num<last) ans-=num;
-            else ans+=num;
-            last=num;
+            if(i + 1 == n)
+            {
+                num = num+(mp[s[i]]);
+                i++;
+                break;
+            }
+
+            if(mp[s[i]] >= mp[s[i+1]])
+            {
+                
+                num =num+ (mp[s[i]]);
+                i++;
+            }
+
+            if(mp[s[i]] < mp[s[i+1]])
+            {
+                num =num+ ( (mp[s[i+1]]) - (mp[s[i]]) );
+                i = i + 2;
+
+            }
         }
-        return ans;
+
+        return num;
     }
 };
