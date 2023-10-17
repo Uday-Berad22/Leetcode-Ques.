@@ -22,6 +22,7 @@ public:
                 if(grid[i][j]==2){
                     Myclass obj(i,j,0);
                     q.push(obj);
+                    grid[i][j]=-1;
                 }
                 if(grid[i][j]==1)freshcnt++;
             }
@@ -32,8 +33,6 @@ public:
         while(!q.empty()){
             Myclass obj=q.front();
             q.pop();
-            if(grid[obj.x][obj.y]==-1) continue;
-            grid[obj.x][obj.y]=-1;
             count++;
             ans=max(ans,obj.time);
             for(auto &dir: directions){
@@ -42,6 +41,7 @@ public:
                 if(i>=0&&i<m&&j>=0&&j<n&&grid[i][j]==1&&grid[i][j]!=-1){
                     Myclass object(i,j,obj.time+1);
                     q.push(object);
+                    grid[i][j]=-1;
                 }
             }
         }
