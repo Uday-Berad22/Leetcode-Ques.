@@ -19,7 +19,6 @@ public:
         vector<int> ntime(n+1,0);
         int ans=0;
         while(!q.empty()){
-            int x=0;
             int qsize=q.size();
             for(int i=0;i<qsize;i++){
                 pair<int,int> node=q.front();
@@ -40,3 +39,20 @@ public:
         return ans;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
