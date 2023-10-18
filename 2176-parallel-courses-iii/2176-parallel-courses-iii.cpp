@@ -1,58 +1,24 @@
 class Solution {
 public:
+    vector<int> dp,out;
+    vector<vector<int>> adj;
+    int dfs(int u,vector<int> &time){
+        if(dp[u]!=-1)
+            return dp[u];
+        int res=time[u-1];
+        for(auto &v:adj[u])
+            res=max(res,time[u-1]+dfs(v,time));
+        return dp[u]=res;
+    }
     int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time) {
-        vector<vector<int>> graph(n+1);
-        unordered_map<int,int> indegree;
-        for(int i=1;i<n+1;i++) indegree[i]=0;
-        for(int i=0;i<relations.size();i++){
-            graph[relations[i][0]].push_back(relations[i][1]);
-            indegree[relations[i][1]]++;
+        dp.resize(n+1,-1);
+        adj.resize(n+1);
+        for(auto &e:relations){
+            adj[e[1]].push_back(e[0]);
         }
-        queue<pair<int,int>> q;
-        vector<bool> visited(n+1,false);
-        for(auto &a: indegree){
-            if(a.second==0){
-                visited[a.first]=true;
-                q.push({a.first,time[a.first-1]});
-            }
-        }
-        vector<int> ntime(n+1,0);
         int ans=0;
-        while(!q.empty()){
-            int qsize=q.size();
-            for(int i=0;i<qsize;i++){
-                pair<int,int> node=q.front();
-                q.pop();
-                ans=max(ans,node.second);
-                for(auto &nbr:graph[node.first]){
-                    if(visited[nbr]==false){
-                        indegree[nbr]--;
-                        ntime[nbr-1]=max(ntime[nbr-1],time[nbr-1]+node.second);
-                        if(indegree[nbr]==0){
-                            q.push({nbr,ntime[nbr-1]});
-                            visited[nbr]=true;
-                        }
-                    }
-                }
-            }
-        }
+        for(int i=1;i<=n;i++)
+            ans=max(ans,dfs(i,time));
         return ans;
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
