@@ -54,7 +54,6 @@ public:
                 j--;
         }
         t=t.substr(j+1,t.size()-(j+1));
-        cout<<t<<" "<<j<<endl;
         return t==s;
     }
 };
