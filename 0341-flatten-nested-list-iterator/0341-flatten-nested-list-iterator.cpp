@@ -15,34 +15,37 @@
  *     const vector<NestedInteger> &getList() const;
  * };
  */
-void recur(vector<NestedInteger> &nestedList,vector<int> &v){
-    for(int i=0;i<nestedList.size();i++){
-        if(nestedList[i].isInteger()){
-                int x=nestedList[i].getInteger();
-                v.push_back(x);
-        }
-        else{
-            vector<NestedInteger> temp=nestedList[i].getList();
-            recur(temp,v);
-        }
-    }
-}
-class NestedIterator {
-public:
 
-    vector<int> v;
-    int i=0;
+class NestedIterator {
+    stack<NestedInteger> stk;
+public:
     NestedIterator(vector<NestedInteger> &nestedList) {
-        recur(nestedList,v);
+        for(int i=nestedList.size()-1;i>=0;i--){
+            stk.push(nestedList[i]);
+        }
     }
     
     int next() {
-        return v[i++];
+        if(hasNext()){
+            int x=stk.top().getInteger();
+            stk.pop();
+            return x;
+        }
+        return -1;
     }
     
     bool hasNext() {
-        if(i==v.size()) return false;
-        return true;
+        while(!stk.empty()){
+            if(stk.top().isInteger()){
+                return true;
+            }
+            vector<NestedInteger> newList=stk.top().getList();
+            stk.pop();
+            for(int i=newList.size()-1;i>=0;i--){
+                stk.push(newList[i]);
+            }
+        }
+        return false;
     }
 };
 
