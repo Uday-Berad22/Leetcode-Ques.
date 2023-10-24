@@ -30,18 +30,13 @@ public:
                 }
             }
         }
-        boundary=false;
-        for(int i=1;i<n-1;i++){
-            for(int j=1;j<m-1;j++){
-                    if(mat[i][j]=='O')
-                    DFS(i,j,mat,boundary);
-            }
-        }
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(mat[i][j]=='-'){
                     mat[i][j]='O';
                 }
+                else if(mat[i][j]=='O')
+                    mat[i][j]='X';
             }
         }
     }
