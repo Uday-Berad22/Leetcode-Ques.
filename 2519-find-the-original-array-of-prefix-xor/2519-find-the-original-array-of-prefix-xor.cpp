@@ -2,11 +2,12 @@ class Solution {
 public:
     vector<int> findArray(vector<int>& pref) {
         int n=pref.size();
-        vector<int> ans(n);
-        ans[0]=pref[0];
+        int prev=pref[0];
         for(int i=1;i<n;i++){
-            ans[i]=pref[i-1]^pref[i];
+            int prev1=pref[i];
+            pref[i]=prev^pref[i];
+            prev=prev1;
         }
-        return ans;
+        return pref;
     }
 };
